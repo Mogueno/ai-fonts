@@ -1,0 +1,30 @@
+{
+  "name": "ai-fonts",
+  "version": "1.0.0",
+  "description": "AI fonts for your projects, with ease of use.",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "type": "module",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsup src/index.tsx --format cjs,esm --dts"
+  },
+  "keywords": [
+    "fonts",
+    "ai-fonts",
+    "colorfull-fonts",
+    "fonts"
+  ],
+  "author": "mogueno",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "tsup": "^8.1.0",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  }
+}

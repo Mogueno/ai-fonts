@@ -1,0 +1,2 @@
+import F from"react";var o=["#FF0000","#FF7F00","#FFFF00","#00FF00","#0000FF","#4B0082","#8B00FF"],r=({children:s})=>{let n=s.split("");return F.createElement("span",null,n.map((e,t)=>F.createElement("span",{key:t,style:{color:o[t%o.length]}},e)))},p=r;export{p as default};
+//# sourceMappingURL=index.js.map
