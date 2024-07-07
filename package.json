@@ -1,6 +1,6 @@
 {
   "name": "ai-fonts",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "AI fonts for your projects, with ease of use.",
   "main": "./dist/index.js",
   "module": "./dist/index.cjs",

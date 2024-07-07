@@ -38,22 +38,20 @@ interface AiFontProps {
 
 const AiFont: React.FC<AiFontProps> = ({
   children,
-  animationDuration = "5s",
+  animationDuration = "medium",
   colors = "rainbow",
 }) => {
   // Choose colors
   let colorsOpt;
 
   switch (colors) {
-    case "rainbow":
-      colorsOpt = colorsRainbow;
-      break;
     case "blue":
       colorsOpt = colorsBlue;
       break;
     case "yellow":
       colorsOpt = colorsYellow;
       break;
+    case "rainbow":
     default:
       colorsOpt = colorsRainbow;
   }
@@ -71,30 +69,34 @@ const AiFont: React.FC<AiFontProps> = ({
       100% { color: ${colorsOpt[0]}; } 
     }
   `;
+
   let seconds;
+  switch (animationDuration) {
+    case "short":
+      seconds = "10s";
+      break;
+    case "medium":
+      seconds = "20s";
+      break;
+    case "long":
+      seconds = "45s";
+      break;
+    default:
+      seconds = "20s";
+  }
+
   // Create a style element to inject keyframes
   const style = document.createElement("style");
   style.type = "text/css";
   style.appendChild(document.createTextNode(keyframes));
   document.head.appendChild(style);
 
-  switch (animationDuration) {
-    case "short":
-      seconds = "10s";
-    case "medium":
-      seconds = "20s";
-    case "long":
-      seconds = "45s";
-    default:
-      seconds = "5s";
-  }
-
   return (
     <span
       className="rainbow-text"
       style={{
         display: "inline-block",
-        animation: `rainbowText ${animationDuration} linear infinite`,
+        animation: `rainbowText ${seconds} linear infinite`,
         textShadow: `
               -1px -1px 0 #fff,
               1px -1px 0 #fff,
