@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { AiFontProps } from "./types";
 
 const colorsRainbow = [
   "#FF0000",
@@ -29,14 +30,6 @@ const colorsYellow = [
   "#00FF00",
   "#FFFF00",
 ];
-
-interface AiFontProps {
-  children: React.ReactNode;
-  animationDuration?: "short" | "medium" | "long";
-  colors?: "rainbow" | "blue" | "yellow";
-  textShadow?: "none" | "default";
-  fontFamily?: string;
-}
 
 const AiFont: React.FC<AiFontProps> = ({
   children,
