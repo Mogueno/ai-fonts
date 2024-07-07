@@ -6,6 +6,9 @@
   "module": "./dist/index.cjs",
   "type": "module",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup src/index.tsx --format cjs,esm --dts"
   },
