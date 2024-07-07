@@ -42,6 +42,8 @@ AiFont accepts the following props:
 • children: React.ReactNode - The text or components that will be animated.
 • animationDuration: "short" | "medium" | "long" - Duration of the animation. Default is "medium".
 • colors: "rainbow" | "blue" | "yellow" - Color theme of the animation. Default is "rainbow".
+• textShadow: "none" | "default" - Text shadow effect. Default is "default".
+• fontFamily: string - Font family of the text. Default is "sans-serif".
 
 ### Example with props
 
@@ -52,13 +54,32 @@ import AiFont from "ai-fonts";
 const App = () => {
   return (
     <div>
-      <AiFont animationDuration="short" colors="blue">
+      <AiFont
+        animationDuration="short"
+        colors="blue"
+        textShadow="none"
+        fontFamily="monospace"
+      >
         Blue Text
       </AiFont>
-      <AiFont animationDuration="medium" colors="yellow">
+
+      <AiFont
+        animationDuration="long"
+        colors="yellow"
+        textShadow="default"
+        fontFamily="cursive"
+      >
         Yellow Text
       </AiFont>
-      <AiFont animationDuration="long">Rainbow Text</AiFont>
+
+      <AiFont
+        animationDuration="medium"
+        colors="rainbow"
+        textShadow="none"
+        fontFamily="fantasy"
+      >
+        Rainbow Text
+      </AiFont>
     </div>
   );
 };
@@ -72,15 +93,20 @@ The component uses CSS keyframes for animation and JavaScript to dynamically cre
 
 ### Color Themes
 
-    •	Rainbow: A colorful gradient animation.
-    •	Blue: Different shades of blue.
-    •	Yellow: Alternating yellow and green.
+• Rainbow: A colorful gradient animation.
+• Blue: Different shades of blue.
+• Yellow: Alternating yellow and green.
 
 ### Animation Durations
 
-    •	Short: 10 seconds
-    •	Medium: 20 seconds
-    •	Long: 45 seconds
+• Short: 10 seconds
+• Medium: 20 seconds
+• Long: 45 seconds
+
+### Text Shadow
+
+• None: No text shadow
+• Default: A white text shadow
 
 ### Contributing
 

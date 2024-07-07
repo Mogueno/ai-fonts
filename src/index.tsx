@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const colorsRainbow = [
   "#FF0000",
@@ -34,12 +34,16 @@ interface AiFontProps {
   children: React.ReactNode;
   animationDuration?: "short" | "medium" | "long";
   colors?: "rainbow" | "blue" | "yellow";
+  textShadow?: "none" | "default";
+  fontFamily?: string;
 }
 
 const AiFont: React.FC<AiFontProps> = ({
   children,
   animationDuration = "medium",
   colors = "rainbow",
+  textShadow = "default",
+  fontFamily,
 }) => {
   // Choose colors
   let colorsOpt;
@@ -57,19 +61,36 @@ const AiFont: React.FC<AiFontProps> = ({
   }
 
   // Generate keyframes for animation
-  const keyframes = `
+  const generateKeyframes = (colors: string[]) => `
     @keyframes rainbowText {
-      0% { color: ${colorsOpt[0]}; }
-      14% { color: ${colorsOpt[1]}; }
-      28% { color: ${colorsOpt[2]}; }
-      42% { color: ${colorsOpt[3]}; }
-      57% { color: ${colorsOpt[4]}; }
-      71% { color: ${colorsOpt[5]}; }
-      85% { color: ${colorsOpt[6]}; }
-      100% { color: ${colorsOpt[0]}; } 
+      0% { color: ${colors[0]}; }
+      14% { color: ${colors[1]}; }
+      28% { color: ${colors[2]}; }
+      42% { color: ${colors[3]}; }
+      57% { color: ${colors[4]}; }
+      71% { color: ${colors[5]}; }
+      85% { color: ${colors[6]}; }
+      100% { color: ${colors[0]}; }
     }
   `;
 
+  useEffect(() => {
+    // Generate keyframes dynamically
+    const keyframes = generateKeyframes(colorsOpt);
+
+    // Create a style element to inject keyframes
+    const style = document.createElement("style");
+    style.type = "text/css";
+    style.appendChild(document.createTextNode(keyframes));
+    document.head.appendChild(style);
+
+    return () => {
+      // Clean up: remove style element when component unmounts
+      document.head.removeChild(style);
+    };
+  }, [colorsOpt]); // Run effect whenever colorsOpt changes
+
+  // Determine animation duration
   let seconds;
   switch (animationDuration) {
     case "short":
@@ -85,24 +106,29 @@ const AiFont: React.FC<AiFontProps> = ({
       seconds = "20s";
   }
 
-  // Create a style element to inject keyframes
-  const style = document.createElement("style");
-  style.type = "text/css";
-  style.appendChild(document.createTextNode(keyframes));
-  document.head.appendChild(style);
+  // Determine the text shadow
+  let textShadowOpt;
+  switch (textShadow) {
+    case "none":
+      textShadowOpt = "none";
+      break;
+    case "default":
+    default:
+      textShadowOpt = `
+        0 0 30px ${colorsOpt[0]},
+        0 0 40px ${colorsOpt[0]},
+        0 0 50px ${colorsOpt[0]}
+      `;
+  }
 
   return (
     <span
-      className="rainbow-text"
       style={{
+        fontFamily: fontFamily || "sans-serif",
         display: "inline-block",
         animation: `rainbowText ${seconds} linear infinite`,
         textShadow: `
-              -1px -1px 0 #fff,
-              1px -1px 0 #fff,
-              -1px 1px 0 #fff,
-              1px 1px 0 #fff
-            `,
+          ${textShadowOpt}`,
       }}
     >
       {children}
